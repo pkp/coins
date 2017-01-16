@@ -71,8 +71,8 @@ class CoinsPlugin extends GenericPlugin {
 				array('rft_id', Request::url(null, 'article', 'view', $article->getId())),
 				array('rft_val_fmt', 'info:ofi/fmt:kev:mtx:journal'),
 				array('rft.genre', 'article'),
-				array('rft.title', $journal->getLocalizedTitle()),
-				array('rft.jtitle', $journal->getLocalizedTitle()),
+				array('rft.title', $journal->getLocalizedName()),
+				array('rft.jtitle', $journal->getLocalizedName()),
 				array('rft.atitle', $article->getLocalizedTitle()),
 				array('rft.artnum', $article->getBestArticleId()),
 				array('rft.stitle', $journal->getLocalizedSetting('abbreviation')),
@@ -84,7 +84,10 @@ class CoinsPlugin extends GenericPlugin {
 			);
 
 			$datePublished = $article->getDatePublished();
-			if (!$datePublished) $datePublished = $issue->getDatePublished();
+			if (!$datePublished) {
+				$datePublished = $issue->getDatePublished();
+			}
+
 			if ($datePublished) {
 				$vars[] = array('rft.date', date('Y-m-d', strtotime($datePublished)));
 			}
@@ -93,10 +96,18 @@ class CoinsPlugin extends GenericPlugin {
 				$vars[] = array('rft.au', $author->getFullName());
 			}
 
-			if ($doi = $article->getPubId('doi')) $vars[] = array('rft_id', 'info:doi/' . $doi);
-			if ($article->getPages()) $vars[] = array('rft.pages', $article->getPages());
-			if ($journal->getSetting('printIssn')) $vars[] = array('rft.issn', $journal->getSetting('printIssn'));
-			if ($journal->getSetting('onlineIssn')) $vars[] = array('rft.eissn', $journal->getSetting('onlineIssn'));
+			if ($doi = $article->getStoredPubId('doi')) {
+				$vars[] = array('rft_id', 'info:doi/' . $doi);
+			}
+			if ($article->getPages()) {
+				$vars[] = array('rft.pages', $article->getPages());
+			}
+			if ($journal->getSetting('printIssn')) {
+				$vars[] = array('rft.issn', $journal->getSetting('printIssn'));
+			}
+			if ($journal->getSetting('onlineIssn')) {
+				$vars[] = array('rft.eissn', $journal->getSetting('onlineIssn'));
+			}
 
 			$title = '';
 			foreach ($vars as $entries) {
