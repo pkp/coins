@@ -33,10 +33,18 @@ class CoinsPlugin extends GenericPlugin {
 		return $success;
 	}
 
+	/**
+	 * Get the display name of this plugin
+	 * @return string
+	 */
 	function getDisplayName() {
 		return __('plugins.generic.coins.displayName');
 	}
 
+    /**
+     * Get the description of this plugin
+	 * @return string
+	 */
 	function getDescription() {
 		return __('plugins.generic.coins.description');
 	}
