@@ -2,16 +2,17 @@
 <!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
 
 <!--
-  * plugins/generic/coins/locale/sr_SR/locale.xml
-  *
-  * Copyright (c) 2013-2017 Simon Fraser University Library
-  * Copyright (c) 2003-2017 John Willinsky
-  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
-  *
-  * COinS plugin localization strings for the sr_SR (Cрпски) locale.
-  *
-  -->
- 
+ * plugins/generic/coins/locale/sr_SR/locale.xml
+ *
+ * Copyright (c) 2013-2017 Simon Fraser University Library
+ * Copyright (c) 2003-2017 John Willinsky
+ * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ * Credits: https://pkp.sfu.ca/wiki/index.php?title=OJS:_Serbian_(sr_SR)
+ *
+ * COinS plugin localization strings for the sr_SR (Cрпски) locale.
+ *
+ -->
+
 <locale name="sr_SR" full_name="Cрпски">
 	<message key="plugins.generic.coins.displayName">COinS dodatak</message>
 	<message key="plugins.generic.coins.description">COinS dodatak dodaje OpenURL opis na stranice članaka (apstrakt i HTML) koji se može koristiti za npr. ekstrakciju u alatke citata.</message>
