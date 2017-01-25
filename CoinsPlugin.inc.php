@@ -41,8 +41,8 @@ class CoinsPlugin extends GenericPlugin {
 		return __('plugins.generic.coins.displayName');
 	}
 
-    /**
-     * Get the description of this plugin
+	/**
+	 * Get the description of this plugin
 	 * @return string
 	 */
 	function getDescription() {
