@@ -60,6 +60,9 @@ class CoinsPlugin extends GenericPlugin {
 
 	/**
 	 * Insert COinS tag.
+	 * @param $hookName string
+	 * @param $params array
+	 * @return boolean
 	 */
 	function insertFooter($hookName, $params) {
 		if ($this->getEnabled()) {
