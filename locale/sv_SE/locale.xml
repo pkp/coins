@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+
+<!--
+  * plugins/generic/coins/locale/sv_SE/locale.xml
+  *
+  * Copyright (c) 2013-2017 Simon Fraser University Library
+  * Copyright (c) 2003-2017 John Willinsky
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  * Localization information: https://pkp.sfu.ca/wiki/index.php?title=OJS:_Swedish_(sv_SE)
+  * COinS plugin localization strings.
+ -->
+ 
+<locale name="sv_SE" full_name="Svenska">
+	<message key="plugins.generic.coins.displayName">COinS-plugin</message>
+	<message key="plugins.generic.coins.description">COinS-pluginet lägger till en OpenURL-descriptor till artikelsidor (abstract och HTML) som kan användas för t.ex. extrahering till referensverktyg.</message>
+</locale>
