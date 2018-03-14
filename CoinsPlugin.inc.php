@@ -3,8 +3,8 @@
 /**
  * @file plugins/generic/coins/CoinsPlugin.inc.php
  *
- * Copyright (c) 2013-2017 Simon Fraser University Library
- * Copyright (c) 2003-2017 John Willinsky
+ * Copyright (c) 2013-2018 Simon Fraser University
+ * Copyright (c) 2003-2018 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @class CoinsPlugin
@@ -46,15 +46,6 @@ class CoinsPlugin extends GenericPlugin {
 	 */
 	function getDescription() {
 		return __('plugins.generic.coins.description');
-	}
-
-	/**
-	 * Get the name of the settings file to be installed site-wide when
-	 * OJS is installed.
-	 * @return string
-	 */
-	function getInstallSitePluginSettingsFile() {
-		return $this->getPluginPath() . '/settings.xml';
 	}
 
 	/**
