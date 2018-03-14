@@ -27,8 +27,7 @@ class CoinsPlugin extends GenericPlugin {
 		$success = parent::register($category, $path);
 		if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE')) return true;
 		if ($success && $this->getEnabled()) {
-			HookRegistry::register('Templates::Article::Footer::PageFooter', array($this, 'insertFooter'));
-			HookRegistry::register('Templates::Issue::Issue::Article', array($this, 'insertFooter'));
+			HookRegistry::register('Templates::Common::Footer::PageFooter', array($this, 'insertFooter'));
 		}
 		return $success;
 	}
@@ -66,9 +65,16 @@ class CoinsPlugin extends GenericPlugin {
 	 */
 	function insertFooter($hookName, $params) {
 		if ($this->getEnabled()) {
+			$request = Application::getRequest();
+
+			// Ensure that the callback is being called from a page COinS should be embedded in.
+			if (!in_array($request->getRequestedPage() . '/' . $request->getRequestedOp(), array(
+				'article/view',
+			))) return false;
+
 			$smarty =& $params[1];
 			$output =& $params[2];
-			$templateMgr =& TemplateManager::getManager();
+			$templateMgr =& TemplateManager::getManager($request);
 
 			$article = $templateMgr->get_template_vars('article');
 			$journal = $templateMgr->get_template_vars('currentJournal');
@@ -79,7 +85,7 @@ class CoinsPlugin extends GenericPlugin {
 
 			$vars = array(
 				array('ctx_ver', 'Z39.88-2004'),
-				array('rft_id', Request::url(null, 'article', 'view', $article->getId())),
+				array('rft_id', $request->url(null, 'article', 'view', $article->getId())),
 				array('rft_val_fmt', 'info:ofi/fmt:kev:mtx:journal'),
 				array('rft.genre', 'article'),
 				array('rft.title', $journal->getLocalizedName()),
