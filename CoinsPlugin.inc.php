@@ -88,9 +88,8 @@ class CoinsPlugin extends GenericPlugin {
 			$authors = $article->getAuthors();
 			if ($firstAuthor = array_shift($authors)) {
 				$vars = array_merge($vars, array(
-					array('rft.aulast', $firstAuthor->getLastName()),
-					array('rft.aufirst', $firstAuthor->getFirstName()),
-					array('rft.auinit', $firstAuthor->getMiddleName()),
+					array('rft.aulast', $firstAuthor->getFamilyName($article->getLocale())),
+					array('rft.aufirst', $firstAuthor->getGivenName($article->getLocale())),
 				));
 			}
 
