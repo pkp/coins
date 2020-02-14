@@ -53,7 +53,7 @@ class CoinsPlugin extends GenericPlugin {
 	 */
 	function insertFooter($hookName, $params) {
 		if ($this->getEnabled()) {
-			$request = Application::getRequest();
+			$request = Application::get()->getRequest();
 
 			// Ensure that the callback is being called from a page COinS should be embedded in.
 			if (!in_array($request->getRequestedPage() . '/' . $request->getRequestedOp(), array(
@@ -67,22 +67,24 @@ class CoinsPlugin extends GenericPlugin {
 			$article = $templateMgr->get_template_vars('article');
 			$journal = $templateMgr->get_template_vars('currentJournal');
 			$issue = $templateMgr->get_template_vars('issue');
+			$publication = $article->getCurrentPublication();
 
 			$vars = array(
 				array('ctx_ver', 'Z39.88-2004'),
 				array('rft_id', $request->url(null, 'article', 'view', $article->getId())),
 				array('rft_val_fmt', 'info:ofi/fmt:kev:mtx:journal'),
+				array('rft.language', $article->getLocale()),
 				array('rft.genre', 'article'),
 				array('rft.title', $journal->getLocalizedName()),
 				array('rft.jtitle', $journal->getLocalizedName()),
-				array('rft.atitle', $article->getLocalizedTitle()),
+				array('rft.atitle', $article->getFullTitle($article->getLocale())),
 				array('rft.artnum', $article->getBestArticleId()),
 				array('rft.stitle', $journal->getLocalizedSetting('abbreviation')),
 				array('rft.volume', $issue->getVolume()),
 				array('rft.issue', $issue->getNumber()),
 			);
 
-			$authors = $article->getAuthors();
+			$authors = $publication->getData('authors');
 			if ($firstAuthor = array_shift($authors)) {
 				$vars = array_merge($vars, array(
 					array('rft.aulast', $firstAuthor->getFamilyName($article->getLocale())),
