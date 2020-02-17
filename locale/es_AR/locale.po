@@ -12,7 +12,7 @@ msgstr ""
 "Language: \n"
 
 msgid "plugins.generic.coins.displayName"
-msgstr "Plugin Coins"
+msgstr "Módulo Coins"
 
 msgid "plugins.generic.coins.description"
-msgstr "El plugin Coins agrega un descriptor de OpenURL a las páginas de los artículos (resumen y HTML) que puede ser usado, por ejemplo, para la extracción en las herramientas de citas."
+msgstr "El módulo Coins agrega un descriptor de OpenURL a las páginas de los artículos (resumen y HTML) que puede ser usado, por ejemplo, para la extracción en las herramientas de citas."
