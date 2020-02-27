@@ -1,7 +1,7 @@
 # COinS Plugin
 
 - OJS COinS Plugin
-- Version: 1.0.1
+- Version: 1.0.3
 
 About
 -----
@@ -15,5 +15,4 @@ accompanying OJS file docs/COPYING for the complete terms of this license.
 
 System Requirements
 -------------------
-OJS 3.0.1 or greater.
-PHP 5.6 or greater.
+OJS 3.2 or greater.
