@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2020-10-19 09:34+0000\n"
-"Last-Translator: Tom Granroth <tom.granroth@tsv.fi>\n"
+"Last-Translator: Antti-Jussi Nygård <ajnyga@gmail.com>\n"
 "Language-Team: Finnish <http://translate.pkp.sfu.ca/projects/plugins/"
 "coins-plugin/fi_FI/>\n"
 "Language: fi_FI\n"
@@ -13,3 +13,8 @@ msgstr ""
 
 msgid "plugins.generic.coins.displayName"
 msgstr "COinS-lisäosa"
+
+msgid "plugins.generic.coins.description"
+msgstr ""
+"COinS-lisäosa tuo OpenURL-tunnisteen artikkelisivuille (tiivistelmä ja HTML)"
+", jota voidaan käyttää viittaustyökalujen syötteessä."
