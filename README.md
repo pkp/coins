@@ -1,7 +1,7 @@
 # COinS Plugin
 
 - OJS COinS Plugin
-- Version: 1.0.3
+- Version: (see version.xml)
 
 About
 -----
@@ -15,4 +15,4 @@ accompanying OJS file docs/COPYING for the complete terms of this license.
 
 System Requirements
 -------------------
-OJS 3.2 or greater.
+OJS 3.3 or greater.
