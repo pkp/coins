@@ -84,10 +84,13 @@ class CoinsPlugin extends GenericPlugin {
             ['rft.atitle', $article->getFullTitle($article->getLocale())],
             ['rft.artnum', $article->getBestArticleId()],
             ['rft.stitle', $journal->getLocalizedSetting('abbreviation')],
-            ['rft.volume', $issue->getVolume()],
-            ['rft.issue', $issue->getNumber()],
         ];
-
+	if ($issue) {
+            $vars = array_merge($vars, [
+                ['rft.volume', $issue->getVolume()],
+                ['rft.issue', $issue->getNumber()],
+            ]);
+        }
         $authors = $publication->getData('authors');
         if ($firstAuthor = $authors->first()) {
             $vars = array_merge($vars, [
@@ -97,7 +100,7 @@ class CoinsPlugin extends GenericPlugin {
         }
 
         $datePublished = $article->getDatePublished();
-        if (!$datePublished) {
+        if (!$datePublished && $issue) {
             $datePublished = $issue->getDatePublished();
         }
 
