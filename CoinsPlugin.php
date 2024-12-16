@@ -77,15 +77,15 @@ class CoinsPlugin extends GenericPlugin {
             ['ctx_ver', 'Z39.88-2004'],
             ['rft_id', $request->url(null, 'article', 'view', $article->getId())],
             ['rft_val_fmt', 'info:ofi/fmt:kev:mtx:journal'],
-            ['rft.language', $article->getLocale()],
+            ['rft.language', $article->getData('locale')],
             ['rft.genre', 'article'],
             ['rft.title', $journal->getLocalizedName()],
             ['rft.jtitle', $journal->getLocalizedName()],
-            ['rft.atitle', $article->getFullTitle($article->getLocale())],
-            ['rft.artnum', $article->getBestArticleId()],
+            ['rft.atitle', $publication->getFullTitles()[$article->getData('locale')]],
+            ['rft.artnum', $article->getBestId()],
             ['rft.stitle', $journal->getLocalizedSetting('abbreviation')],
         ];
-	if ($issue) {
+	    if ($issue) {
             $vars = array_merge($vars, [
                 ['rft.volume', $issue->getVolume()],
                 ['rft.issue', $issue->getNumber()],
@@ -94,12 +94,12 @@ class CoinsPlugin extends GenericPlugin {
         $authors = $publication->getData('authors');
         if ($firstAuthor = $authors->first()) {
             $vars = array_merge($vars, [
-                ['rft.aulast', $firstAuthor->getFamilyName($article->getLocale())],
-                ['rft.aufirst', $firstAuthor->getGivenName($article->getLocale())],
+                ['rft.aulast', $firstAuthor->getFamilyName($article->getData('locale'))],
+                ['rft.aufirst', $firstAuthor->getGivenName($article->getData('locale'))],
             ]);
         }
 
-        $datePublished = $article->getDatePublished();
+        $datePublished = $publication->getData('datePublished');
         if (!$datePublished && $issue) {
             $datePublished = $issue->getDatePublished();
         }
@@ -115,8 +115,8 @@ class CoinsPlugin extends GenericPlugin {
         if ($doi = $article->getStoredPubId('doi')) {
             $vars[] = ['rft_id', 'info:doi/' . $doi];
         }
-        if ($article->getPages()) {
-            $vars[] = ['rft.pages', $article->getPages()];
+        if ($publication->getData('pages')) {
+            $vars[] = ['rft.pages', $publication->getData('pages')];
         }
         if ($journal->getSetting('printIssn')) {
             $vars[] = ['rft.issn', $journal->getSetting('printIssn')];
