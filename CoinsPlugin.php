@@ -112,7 +112,7 @@ class CoinsPlugin extends GenericPlugin {
             $vars[] = ['rft.au', $author->getFullName()];
         }
 
-        if ($doi = $article->getStoredPubId('doi')) {
+        if ($doi = $publication->getStoredPubId('doi')) {
             $vars[] = ['rft_id', 'info:doi/' . $doi];
         }
         if ($publication->getData('pages')) {
