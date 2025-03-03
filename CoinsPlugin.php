@@ -3,8 +3,8 @@
 /**
  * @file CoinsPlugin.php
  *
- * Copyright (c) 2013-2023 Simon Fraser University
- * Copyright (c) 2003-2023 John Willinsky
+ * Copyright (c) 2013-2025 Simon Fraser University
+ * Copyright (c) 2003-2025 John Willinsky
  * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
  *
  * @class CoinsPlugin
@@ -13,22 +13,27 @@
 
 namespace APP\plugins\generic\coins;
 
-use PKP\plugins\GenericPlugin;
-use PKP\plugins\Hook;
-use PKP\config\Config;
 use APP\core\Application;
 use APP\template\TemplateManager;
+use PKP\config\Config;
+use PKP\core\PKPApplication;
+use PKP\plugins\GenericPlugin;
+use PKP\plugins\Hook;
 
-class CoinsPlugin extends GenericPlugin {
+class CoinsPlugin extends GenericPlugin
+{
     /**
      * Called as a plugin is registered to the registry
      * @param $category String Name of category plugin was registered to
      * @return boolean True iff plugin initialized successfully; if false,
      *     the plugin will not be registered.
      */
-    function register($category, $path, $mainContextId = null) {
+    public function register($category, $path, $mainContextId = null)
+    {
         $success = parent::register($category, $path, $mainContextId);
-        if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE')) return true;
+        if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE')) {
+            return true;
+        }
         if ($success && $this->getEnabled()) {
             Hook::add('Templates::Common::Footer::PageFooter', [$this, 'insertFooter']);
         }
@@ -39,7 +44,8 @@ class CoinsPlugin extends GenericPlugin {
      * Get the display name of this plugin
      * @return string
      */
-    function getDisplayName() {
+    public function getDisplayName()
+    {
         return __('plugins.generic.coins.displayName');
     }
 
@@ -47,22 +53,25 @@ class CoinsPlugin extends GenericPlugin {
      * Get the description of this plugin
      * @return string
      */
-    function getDescription() {
+    public function getDescription()
+    {
         return __('plugins.generic.coins.description');
     }
 
     /**
      * Insert COinS tag.
      */
-    function insertFooter(string $hookName, array $params) : bool
+    public function insertFooter(string $hookName, array $params): bool
     {
-        if (!$this->getEnabled()) return false;
+        if (!$this->getEnabled()) {
+            return false;
+        }
         $request = Application::get()->getRequest();
 
         // Ensure that the callback is being called from a page COinS should be embedded in.
-        if (!in_array($request->getRequestedPage() . '/' . $request->getRequestedOp(), [
-            'article/view',
-        ])) return false;
+        if ($request->getRequestedPage() . '/' . $request->getRequestedOp() != 'article/view') {
+            return false;
+        }
 
         $smarty =& $params[1];
         $output =& $params[2];
@@ -75,7 +84,7 @@ class CoinsPlugin extends GenericPlugin {
 
         $vars = [
             ['ctx_ver', 'Z39.88-2004'],
-            ['rft_id', $request->url(null, 'article', 'view', $article->getId())],
+            ['rft_id', $request->getDispatcher()->url($request, PKPApplication::ROUTE_PAGE, null, 'article', 'view', [$article->getId()], urlLocaleForPage: '')],
             ['rft_val_fmt', 'info:ofi/fmt:kev:mtx:journal'],
             ['rft.language', $article->getData('locale')],
             ['rft.genre', 'article'],
@@ -85,7 +94,7 @@ class CoinsPlugin extends GenericPlugin {
             ['rft.artnum', $article->getBestId()],
             ['rft.stitle', $journal->getLocalizedSetting('abbreviation')],
         ];
-	    if ($issue) {
+        if ($issue) {
             $vars = array_merge($vars, [
                 ['rft.volume', $issue->getVolume()],
                 ['rft.issue', $issue->getNumber()],
@@ -132,9 +141,8 @@ class CoinsPlugin extends GenericPlugin {
         }
         $title = htmlentities(substr($title, 0, -1));
 
-	$output .= "<span class=\"Z3988\" title=\"$title\"></span>\n";
+        $output .= "<span class=\"Z3988\" title=\"$title\"></span>\n";
 
-	return false;
+        return false;
     }
 }
-
