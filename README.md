@@ -10,7 +10,7 @@ permitting tools like Zotero (http://www.zotero.org) to grab citations.
 
 License
 -------
-This plugin is licensed under the GNU General Public License v2. See the
+This plugin is licensed under the GNU General Public License v3. See the
 accompanying OJS file docs/COPYING for the complete terms of this license.
 
 System Requirements
