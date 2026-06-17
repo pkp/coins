@@ -88,8 +88,8 @@ class CoinsPlugin extends GenericPlugin
             ['rft_val_fmt', 'info:ofi/fmt:kev:mtx:journal'],
             ['rft.language', $article->getData('locale')],
             ['rft.genre', 'article'],
-            ['rft.title', $journal->getLocalizedName()],
-            ['rft.jtitle', $journal->getLocalizedName()],
+            ['rft.title', $publication->getLocalizedContextName($journal)],
+            ['rft.jtitle', $publication->getLocalizedContextName($journal)],
             ['rft.atitle', $publication->getFullTitles()[$article->getData('locale')]],
             ['rft.artnum', $article->getBestId()],
             ['rft.stitle', $journal->getLocalizedSetting('abbreviation')],
@@ -127,11 +127,11 @@ class CoinsPlugin extends GenericPlugin
         if ($publication->getData('pages')) {
             $vars[] = ['rft.pages', $publication->getData('pages')];
         }
-        if ($journal->getSetting('printIssn')) {
-            $vars[] = ['rft.issn', $journal->getSetting('printIssn')];
+        if ($printIssn = $publication->getPrintIssn($journal)) {
+            $vars[] = ['rft.issn', $printIssn];
         }
-        if ($journal->getSetting('onlineIssn')) {
-            $vars[] = ['rft.eissn', $journal->getSetting('onlineIssn')];
+        if ($onlineIssn = $publication->getOnlineIssn($journal)) {
+            $vars[] = ['rft.eissn', $onlineIssn];
         }
 
         $title = '';
